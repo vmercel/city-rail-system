@@ -14,4 +14,64 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <build>
+        <!-- Specify the output directory for compiled classes -->
+        <directory>target</directory>
+
+        <!-- Define the final name of the JAR (e.g., city-rail-system.jar) -->
+        <finalName>${project.artifactId}</finalName>
+
+        <!-- Plugins for building the project -->
+        <plugins>
+            <!-- Maven Compiler Plugin: Sets Java version to 23 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.13.0</version> <!-- Updated to support Java 23 -->
+                <configuration>
+                    <source>23</source>
+                    <target>23</target>
+                </configuration>
+            </plugin>
+
+            <!-- Maven JAR Plugin: Creates an executable JAR -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.4.2</version> <!-- Latest version for better compatibility -->
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <!-- Specify the main class for the executable JAR -->
+                            <mainClass>edu.miu.cs.cs425.Main</mainClass> <!-- Updated, adjust if needed -->
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+
+            <!-- Maven Antrun Plugin: Copies JAR to dist/ folder -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <id>copy-to-dist</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target>
+                                <!-- Create dist/ directory if it doesn’t exist -->
+                                <mkdir dir="dist"/>
+                                <!-- Copy the JAR to dist/ -->
+                                <copy file="target/${project.artifactId}.jar" todir="dist"/>
+                            </target>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>
