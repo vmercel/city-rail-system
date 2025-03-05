@@ -16,4 +16,4 @@ jobs:
         uses: actions/upload-artifact@v4  # Updated to v4
         with:
           name: library-jar
-          path: target/city-rail-system-1.0-SNAPSHOT.jar
+          path: dist/city-rail-system-1.0-SNAPSHOT.jar
